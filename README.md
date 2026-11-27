@@ -1,10 +1,10 @@
 # Informal-to-Formal Query Normalization for a Lightweight Indonesian RAG Pipeline
 
-Deep Learning course project, BINUS University, Class LE01, **Group 15**.
+Deep Learning course project.
 
 Team: Demetrius Howard Setiawan (2802424300) · Haposan Emmanuel Tobias (2802417314) · Jonathan Alston Jayapurnama (2802424156)
 
-> Status: work in progress. This repository holds the experiment notebook and a draft demo app. Numbers below come from the current notebook run.
+> Status: work in progress. Numbers below come from the current notebook run.
 
 ## What this project asks
 
@@ -78,7 +78,6 @@ informal query
 | `faq.csv`, `gold.csv` | FAQ documents and labeled queries. **Required** for the retrieval and generation sections |
 | `gen_graded.csv` | Hand-graded generated answers (`correct`, `faithful`, 0/1) |
 | `results_table.csv`, `loss_curves.png`, `fig_chrf.png`, `fig_retrieval.png` | Result table and figures |
-| `streamlit_app/` | Draft demo app (see below) |
 
 ## How to run the notebook
 
@@ -87,20 +86,9 @@ informal query
 3. Run all cells from top to bottom. Generation (Qwen) needs the GPU.
 4. For the answer-quality test, download `gen_outputs.csv`, grade the `correct` and `faithful` columns by hand (0/1), save it as `gen_graded.csv`, upload it, and run the McNemar cell.
 
-## Demo app (draft)
-
-`streamlit_app/app.py` compares three conditions side by side (raw query, E1 normalized query, Oracle) and shows the top-3 FAQ matches with scores and an optional Qwen answer.
-
-It needs the fine-tuned E1 checkpoint, saved from the notebook with `save_pretrained("indobart_e1")`. The checkpoint is large and is **not** stored in this repository.
-
-```bash
-pip install -r streamlit_app/requirements.txt
-streamlit run streamlit_app/app.py
-```
 
 Environment variables: `NORMALIZER_DIR` (default `indobart_e1`), `FAQ_CSV`, `LLM_ID`.
 
-The app has been syntax-checked but not yet run end to end.
 
 ## Limitations
 
@@ -110,4 +98,4 @@ The app has been syntax-checked but not yet run end to end.
 
 ## References
 
-Full APA reference list is in the project report. Main sources: STIF-Indonesia (Wibowo et al., 2020), IndoBART / IndoNLG (Cahyawijaya et al., 2021), BART (Lewis et al., 2020), RAG (Lewis et al., 2020), multilingual E5 (Wang et al., 2024), Qwen2.5 (Qwen Team, 2024).
+Main sources: STIF-Indonesia (Wibowo et al., 2020), IndoBART / IndoNLG (Cahyawijaya et al., 2021), BART (Lewis et al., 2020), RAG (Lewis et al., 2020), multilingual E5 (Wang et al., 2024), Qwen2.5 (Qwen Team, 2024).
