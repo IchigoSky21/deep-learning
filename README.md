@@ -2,12 +2,13 @@
 
 Deep Learning course project
 
-Team: 
-Demetrius Howard Setiawan (2802424300)
+Team:
 
-Haposan Emmanuel Tobias (2802417314)
+- Demetrius Howard Setiawan (2802424300)
 
-Jonathan Alston Jayapurnama (2802424156)
+- Haposan Emmanuel Tobias (2802417314)
+
+- Jonathan Alston Jayapurnama (2802424156)
 
 > Status: work in progress. Numbers below come from the current notebook run.
 
