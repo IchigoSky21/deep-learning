@@ -1,6 +1,6 @@
 # Informal-to-Formal Query Normalization for a Lightweight Indonesian RAG Pipeline
 
-Deep Learning course project.
+Deep Learning course project, BINUS University, Class LE01, **Group 15**.
 
 Team: Demetrius Howard Setiawan (2802424300) · Haposan Emmanuel Tobias (2802417314) · Jonathan Alston Jayapurnama (2802424156)
 
@@ -26,7 +26,7 @@ informal query
 | Normalizer | IndoBART-v2 (131.5M parameters), greedy decoding, max 64 tokens |
 | Retrieval | multilingual-e5-small, `query:` / `passage:` prefixes, cosine similarity, top-3 |
 | Generator | Qwen2.5-1.5B-Instruct, greedy, 96 new tokens, answers only from the retrieved FAQ |
-| Training data | STIF-Indonesia (2,499 informal/formal sentence pairs from customer-service chats) |
+| Training data | STIF-Indonesia (2,499 informal/formal sentence pairs from customer-service chats), loaded from Hugging Face inside the notebook |
 
 ## Experiments
 
@@ -48,6 +48,8 @@ informal query
 |---|---|---|---|---|---|
 | 65.45 | 70.90 | 76.56 | **78.46** | 77.67 | 76.95 |
 
+![chrF on the test set](fig_chrf.png)
+
 **FAQ retrieval** (30 FAQ documents, 126 labeled queries):
 
 | Condition | Recall@1 | Recall@3 |
@@ -59,6 +61,12 @@ informal query
 | E2 | 54.0 | 68.3 |
 | E3 | 53.2 | 65.1 |
 | Oracle_formal | 52.4 | 69.8 |
+
+![FAQ retrieval by condition](fig_retrieval.png)
+
+**Training curves:**
+
+![Loss curves](loss_curves.png)
 
 **Generated answers** (30 questions, graded by hand as 0/1):
 
@@ -72,23 +80,24 @@ informal query
 
 ## Repository contents
 
-| File / folder | Purpose |
+| File | Purpose |
 |---|---|
 | `AOL_DeepLearning.ipynb` | Full experiment notebook (data, training, retrieval, generation, tests) |
-| `faq.csv`, `gold.csv` | FAQ documents and labeled queries. **Required** for the retrieval and generation sections |
-| `gen_graded.csv` | Hand-graded generated answers (`correct`, `faithful`, 0/1) |
-| `results_table.csv`, `loss_curves.png`, `fig_chrf.png`, `fig_retrieval.png` | Result table and figures |
+| `faq.csv` | 30 FAQ documents (`faq_id`, `question`, `answer`). **Required** for the retrieval and generation sections |
+| `gold.csv` | 126 test queries mapped to the correct FAQ (`test_id`, `faq_id`). **Required** with `faq.csv` |
+| `test_queries_for_labeling.csv` | The 150 test queries (`test_id`, `informal`, `formal`) used for labeling `gold.csv` |
+| `gen_outputs.csv` | Generated answers before grading (`correct` and `faithful` still empty) |
+| `gen_outputs_graded.csv` | Same file after hand grading (`correct`, `faithful`, 0/1). Input for the McNemar cell |
+| `results_table.csv` | Result table: chrF, BLEU, exact match, Recall@1/3, MRR, training details, latency |
+| `loss_curves.png` | Training and validation loss curves |
+| `fig_chrf.png`, `fig_retrieval.png` | Result figures produced by the notebook |
 
 ## How to run the notebook
 
-1. Open `AOL_DeepLearning.ipynb` in Google Colab and choose a **GPU runtime** (we used a Tesla T4).
+1. Open `AOL_DeepLearning.ipynb` in Google Colab and choose a **GPU runtime** (we used a Tesla T4). The first cell installs the needed packages.
 2. Upload `faq.csv` and `gold.csv` to the Colab working folder **before** running the retrieval section. Without them the notebook switches to a proxy mode whose numbers are not valid and must not be reported. The notebook prints `MODE: FAQ NYATA` when the real files are found.
-3. Run all cells from top to bottom. Generation (Qwen) needs the GPU.
-4. For the answer-quality test, download `gen_outputs.csv`, grade the `correct` and `faithful` columns by hand (0/1), save it as `gen_graded.csv`, upload it, and run the McNemar cell.
-
-
-Environment variables: `NORMALIZER_DIR` (default `indobart_e1`), `FAQ_CSV`, `LLM_ID`.
-
+3. Run all cells from top to bottom. Generation (Qwen) needs the GPU and writes `gen_outputs.csv`.
+4. For the answer-quality test, grade the `correct` and `faithful` columns of `gen_outputs.csv` by hand (0/1), save the result as `gen_outputs_graded.csv`, upload it, and run the McNemar cell.
 
 ## Limitations
 
@@ -98,4 +107,4 @@ Environment variables: `NORMALIZER_DIR` (default `indobart_e1`), `FAQ_CSV`, `LLM
 
 ## References
 
-Main sources: STIF-Indonesia (Wibowo et al., 2020), IndoBART / IndoNLG (Cahyawijaya et al., 2021), BART (Lewis et al., 2020), RAG (Lewis et al., 2020), multilingual E5 (Wang et al., 2024), Qwen2.5 (Qwen Team, 2024).
+Main sources: STIF-Indonesia (Wibowo et al., 2020), IndoBART / IndoNLG (Cahyawijaya et al., 2021), BART (Lewis et al., 2020), RAG (Lewis et al., 2020), multilingual E5 (Wang et al., 2024), Qwen2.5 (Qwen Team, 2024). The full APA reference list is in the project report.
