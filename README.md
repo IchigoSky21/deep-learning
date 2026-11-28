@@ -2,7 +2,8 @@
 
 Deep Learning course project
 
-Team: Demetrius Howard Setiawan (2802424300)
+Team: 
+Demetrius Howard Setiawan (2802424300)
 
 Haposan Emmanuel Tobias (2802417314)
 
