@@ -1,8 +1,10 @@
 # Informal-to-Formal Query Normalization for a Lightweight Indonesian RAG Pipeline
 
-Deep Learning course project, BINUS University, Class LE01, **Group 15**.
+Deep Learning course project
 
-Team: Demetrius Howard Setiawan (2802424300) · Haposan Emmanuel Tobias (2802417314) · Jonathan Alston Jayapurnama (2802424156)
+Team: Demetrius Howard Setiawan (2802424300)
+Haposan Emmanuel Tobias (2802417314)
+Jonathan Alston Jayapurnama (2802424156)
 
 > Status: work in progress. Numbers below come from the current notebook run.
 
