@@ -68,7 +68,7 @@ informal query
 | E3 | 53.2 | 65.1 |
 | Oracle_formal | 52.4 | 69.8 |
 
-![FAQ retrieval by condition](fig_retrieval.png)
+![FAQ retrieval by condition](fig_faq.png)
 
 **Training curves:**
 
